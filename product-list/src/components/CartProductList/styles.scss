@@ -1,0 +1,63 @@
+@import "../../assets/scss/sass-utils/variables";
+
+.cart-product {
+  margin-top: 1.56rem;
+}
+
+.cart-product-list {
+  margin-bottom: 1rem;
+  border-bottom: 1px solid $rose-100;
+  h3 {
+    font-size: 1rem;
+    font-weight: 500;
+    color: $rose-900;
+  }
+  .cart-product-item {
+    margin-top: 0.5rem;
+    &-qtd {
+      font-weight: 700;
+      color: $red;
+      margin-right: 1.56rem;
+    }
+    &-discount {
+      font-weight: 400;
+      color: $rose-300;
+      margin-right: 0.625rem;
+    }
+    &-price {
+      font-weight: 600;
+      color: $rose-400;
+    }
+  }
+  .cart-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+  .btn-delete {
+    display: flex;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    svg {
+      color: $rose-300;
+      transition: color 0.3s;
+      &:hover {
+        color: $rose-400;
+      }
+    }
+  }
+}
+
+.cart-product-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: $rose-900;
+  span {
+    &:last-child {
+      font-weight: 700;
+      font-size: 1.7rem;
+    }
+  }
+}

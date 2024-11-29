@@ -1,0 +1,107 @@
+@import "../../assets/scss/sass-utils/variables";
+
+.card {
+  display: grid;
+  grid-template-columns: repeat(3, 18.75rem);
+  gap: 1.5rem;
+  margin-top: 1rem;
+  &-item {
+    picture {
+      img {
+        width: 100%;
+        border-radius: 0.625rem;
+      }
+    }
+  }
+  &-content {
+    margin-top: 1.56rem;
+    .category {
+      color: $rose-400;
+      font-weight: 600;
+    }
+    .name {
+      color: $rose-500;
+      font-weight: bold;
+    }
+    .price {
+      color: $red;
+      font-weight: bold;
+    }
+  }
+}
+
+.image-container {
+  position: relative;
+  .btn-card {
+    .btn {
+      width: 156px;
+      position: absolute;
+      bottom: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #fff;
+      color: #000;
+      border: 1px solid $rose-500;
+      border-radius: 20px;
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s;
+      &:hover {
+        border: 1px solid $red;
+        color: $red;
+      }
+      .icon {
+        font-size: 15px;
+        color: $red;
+      }
+    }
+    .btn-add-qtd {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: $red;
+      cursor: initial;
+      button {
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+      }
+      button,
+      span {
+        color: #fff;
+      }
+    }
+  }
+}
+
+.content-grid {
+  display: grid;
+  grid-template-columns: auto 24.06rem;
+  .cart {
+    background-color: #fff;
+    border-radius: 0.625rem;
+    padding: 1.56rem;
+    max-height: 20.75rem;
+    height: 100%;
+    h2 {
+      color: $red;
+    }
+  }
+  .empty-message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    span {
+      color: $rose-400;
+      font-weight: 600;
+      margin-top: 1.56rem;
+    }
+  }
+}

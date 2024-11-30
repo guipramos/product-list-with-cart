@@ -7,7 +7,7 @@ export function CartProductList({
   handleDelete,
 }: CartProductListComponentProps) {
   return (
-    <div className="cart-product">
+    <div className={`${products.length > 3 ? "scroll" : ""} cart-product`}>
       {products.map((product) => {
         return (
           <div className="cart-product-list" key={product.name}>

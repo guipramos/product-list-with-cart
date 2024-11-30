@@ -16,7 +16,11 @@ export function Card({
 
   return (
     <div className="card-item">
-      <div className="image-container">
+      <div
+        className={`${
+          showBtnAddProduct ? "product-select" : ""
+        } image-container`}
+      >
         <picture>
           <source srcSet={image.desktop} media="(min-width: 1024px)" />
           <source srcSet={image.tablet} media="(min-width: 768px)" />

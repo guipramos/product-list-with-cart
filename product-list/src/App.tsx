@@ -94,6 +94,7 @@ export function App() {
                   <span>Order Total</span>
                   <span>${totalValue}</span>
                 </div>
+                <button className="btn-confirm-order">Confirm Order</button>
               </>
             ) : (
               <div className="empty-message">

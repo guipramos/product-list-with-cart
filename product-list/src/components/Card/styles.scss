@@ -87,10 +87,29 @@
     background-color: #fff;
     border-radius: 0.625rem;
     padding: 1.56rem;
-    max-height: 20.75rem;
-    height: 100%;
+    max-width: 400px;
+    min-height: 200px;
+    max-height: fit-content;
     h2 {
       color: $red;
+    }
+    .btn-confirm-order {
+      margin: 16px 0;
+      background-color: $red;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 50px;
+      border: none;
+      border-radius: 20px;
+      color: #fff;
+      font-weight: 600;
+      width: 100%;
+      transition: filter 0.3s;
+      cursor: pointer;
+      &:hover {
+        filter: brightness(90%);
+      }
     }
   }
   .empty-message {
@@ -104,4 +123,9 @@
       margin-top: 1.56rem;
     }
   }
+}
+
+.product-select {
+  border: 2px solid $red;
+  border-radius: 0.625rem;
 }

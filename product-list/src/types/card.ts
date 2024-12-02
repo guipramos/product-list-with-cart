@@ -24,3 +24,22 @@ export interface CartProductListComponentProps {
   products: CartProductListProps[];
   handleDelete: (name: string) => void;
 }
+
+export interface Summary {
+  summary: SummaryProductAdd[];
+  total: number;
+  handleCloseModal?: () => void;
+}
+
+export interface SummaryProductAdd {
+  name: string;
+  quantity: number;
+  priceDiscount: number;
+  price: number;
+  image: {
+    thumbnail: string;
+    mobile: string;
+    tablet: string;
+    desktop: string;
+  }[];
+}

@@ -4,10 +4,13 @@ import data from "./service/data.json";
 import { CardProps, CartProductListProps } from "./types/card";
 import cake from "./assets/images/illustration-empty-cart.svg";
 import { useState } from "react";
+import { Modal } from "./components/Modal/Modal";
 
 export function App() {
   const [cartProducts, setCartProducts] = useState<CartProductListProps[]>([]);
   const [totalValue, setTotalValue] = useState<number>();
+  const [openModalConfirmOrder, setOpenModalConfirmOrder] =
+    useState<boolean>(false);
   const dataCard: CardProps[] = data;
 
   const handleAddToCard = (product: CardProps, quantity: number) => {
@@ -56,59 +59,99 @@ export function App() {
     setCartProducts((prev) => prev.filter((item) => item.name !== name));
   };
 
-  return (
-    <main>
-      <div className="container">
-        <h1 className="title-main">Dessets</h1>
+  const handleCloseModal = () => {
+    setOpenModalConfirmOrder(false);
+    setCartProducts([]);
+  };
 
-        <div className="content-grid">
-          <div className="card">
-            {dataCard.map((item) => {
-              return (
-                <div key={item.name}>
-                  <Card
-                    image={item.image}
-                    category={item.category}
-                    name={item.name}
-                    price={item.price}
-                    handleIncrement={() => handleAddToCard(item, 1)}
-                    handleDecrement={() => handleAddToCard(item, -1)}
-                    count={
-                      cartProducts.find((product) => product.name === item.name)
-                        ?.quantity || 0
-                    }
+  return (
+    <>
+      <main>
+        <div className="container">
+          <h1 className="title-main">Dessets</h1>
+
+          <div className="content-grid">
+            <div className="card">
+              {dataCard.map((item) => {
+                return (
+                  <div key={item.name}>
+                    <Card
+                      image={item.image}
+                      category={item.category}
+                      name={item.name}
+                      price={item.price}
+                      handleIncrement={() => handleAddToCard(item, 1)}
+                      handleDecrement={() => handleAddToCard(item, -1)}
+                      count={
+                        cartProducts.find(
+                          (product) => product.name === item.name
+                        )?.quantity || 0
+                      }
+                    />
+                  </div>
+                );
+              })}
+            </div>
+            <div className="cart">
+              <h2>Your cart ({cartProducts.length})</h2>
+              {cartProducts.length > 0 ? (
+                <>
+                  <CartProductList
+                    products={cartProducts}
+                    handleDelete={deleteItemByName}
                   />
+                  <div className="cart-product-summary">
+                    <span>Order Total</span>
+                    <span>${totalValue}</span>
+                  </div>
+                  <button
+                    onClick={() => setOpenModalConfirmOrder(true)}
+                    className="btn-confirm-order"
+                  >
+                    Confirm Order
+                  </button>
+                </>
+              ) : (
+                <div className="empty-message">
+                  <img
+                    src={cake}
+                    alt="Image of a cake when the cart is empty without any information."
+                  />
+                  <span>Your added items will appear here</span>
                 </div>
-              );
-            })}
-          </div>
-          <div className="cart">
-            <h2>Your cart ({cartProducts.length})</h2>
-            {cartProducts.length > 0 ? (
-              <>
-                <CartProductList
-                  products={cartProducts}
-                  handleDelete={deleteItemByName}
-                />
-                <div className="cart-product-summary">
-                  <span>Order Total</span>
-                  <span>${totalValue}</span>
-                </div>
-                <button className="btn-confirm-order">Confirm Order</button>
-              </>
-            ) : (
-              <div className="empty-message">
-                <img
-                  src={cake}
-                  alt="Image of a cake when the cart is empty without any information."
-                />
-                <span>Your added items will appear here</span>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </div>
-      </div>
-    </main>
+      </main>
+      {openModalConfirmOrder && (
+        <Modal
+          summary={cartProducts.map((item) => {
+            const productData = dataCard.find((p) => p.name === item.name);
+            console.log(item.name);
+
+            return {
+              name: item.name,
+              quantity: item.quantity,
+              priceDiscount: item.priceDiscount,
+              price: item.price,
+              image: productData
+                ? [productData.image]
+                : [
+                    {
+                      thumbnail: "",
+                      mobile: "",
+                      tablet: "",
+                      desktop: "",
+                    },
+                  ],
+            };
+          })}
+          total={Number(totalValue)}
+          handleCloseModal={handleCloseModal}
+        />
+      )}
+    </>
   );
 }
 
